@@ -5,10 +5,23 @@ import { RatingInput } from '@/components/form/RatingInput';
 import { IndicatorSelector } from '@/components/form/IndicatorSelector';
 import { FormSection } from '@/components/form/FormSection';
 import type { IndicatorLevel } from '@/types/dossier';
+function averageToIndicator(avg: number): IndicatorLevel {
+  if (avg <= 1.5) return 'basso';
+  if (avg <= 2.5) return 'medio-basso';
+  if (avg <= 3.5) return 'medio';
+  if (avg <= 4.5) return 'medio-alto';
+  return 'alto';
+}
 
 export function Step1ProfiloComplessivo() {
   const { state, dispatch } = useDossier();
   const data = state.slide1;
+  const slide3 = state.slide3;
+
+  const competenzeAvg = slide3.competencies.reduce((s, c) => s + c.score, 0) / slide3.competencies.length;
+  const potenzialeAvg = slide3.potentialFactors.reduce((s, p) => s + p.score, 0) / slide3.potentialFactors.length;
+  const computedCompetenze = averageToIndicator(competenzeAvg);
+  const computedPotenziale = averageToIndicator(potenzialeAvg);
 
   const update = (fields: Partial<typeof data>) => {
     dispatch({ type: 'UPDATE_SLIDE', slide: 'slide1', data: fields });
@@ -87,16 +100,28 @@ export function Step1ProfiloComplessivo() {
           </FormSection>
 
           <FormSection title="Indicatori">
-            <IndicatorSelector
-              label="Competenze Manageriali"
-              value={data.competenzeManageriali}
-              onChange={v => update({ competenzeManageriali: v as IndicatorLevel })}
-            />
-            <IndicatorSelector
-              label="Potenziale"
-              value={data.potenziale}
-              onChange={v => update({ potenziale: v as IndicatorLevel })}
-            />
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs font-medium text-k2p-dark">Competenze Manageriali</span>
+                <span className="text-xs text-k2p-violet font-bold">({competenzeAvg.toFixed(1)}/5 — calcolato da Step 3)</span>
+              </div>
+              <IndicatorSelector
+                label=""
+                value={computedCompetenze}
+                onChange={() => {}}
+              />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs font-medium text-k2p-dark">Potenziale</span>
+                <span className="text-xs text-k2p-violet font-bold">({potenzialeAvg.toFixed(1)}/5 — calcolato da Step 3)</span>
+              </div>
+              <IndicatorSelector
+                label=""
+                value={computedPotenziale}
+                onChange={() => {}}
+              />
+            </div>
             <IndicatorSelector
               label="Valore Aziendale"
               value={data.valoreAziendale}

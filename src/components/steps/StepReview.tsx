@@ -9,6 +9,17 @@ export function StepReview() {
   const getIndicatorLabel = (value: string) =>
     INDICATOR_LEVELS.find(l => l.value === value)?.label ?? value;
 
+  const competenzeAvg = slide3.competencies.reduce((s, c) => s + c.score, 0) / slide3.competencies.length;
+  const potenzialeAvg = slide3.potentialFactors.reduce((s, p) => s + p.score, 0) / slide3.potentialFactors.length;
+
+  function averageToIndicator(avg: number) {
+    if (avg <= 1.5) return 'basso';
+    if (avg <= 2.5) return 'medio-basso';
+    if (avg <= 3.5) return 'medio';
+    if (avg <= 4.5) return 'medio-alto';
+    return 'alto';
+  }
+
   return (
     <div>
       <h2 className="text-xl font-bold text-k2p-dark mb-1">Revisione e Generazione</h2>
@@ -20,8 +31,8 @@ export function StepReview() {
           <h4 className="text-xs font-bold text-k2p-grape uppercase mb-2">1. Profilo Complessivo</h4>
           <p className="text-sm font-semibold text-k2p-dark mb-1">{slide1.candidateName || '(nome non inserito)'}</p>
           <p className="text-xs text-gray-400">Valore di mercato: <span className="font-bold text-k2p-violet">{slide1.valoreDiMercato}/5</span></p>
-          <p className="text-xs text-gray-400">Competenze: {getIndicatorLabel(slide1.competenzeManageriali)}</p>
-          <p className="text-xs text-gray-400">Potenziale: {getIndicatorLabel(slide1.potenziale)}</p>
+          <p className="text-xs text-gray-400">Competenze: {getIndicatorLabel(averageToIndicator(competenzeAvg))} ({competenzeAvg.toFixed(1)}/5)</p>
+          <p className="text-xs text-gray-400">Potenziale: {getIndicatorLabel(averageToIndicator(potenzialeAvg))} ({potenzialeAvg.toFixed(1)}/5)</p>
         </div>
 
         {/* Slide 2 Summary */}

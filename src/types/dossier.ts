@@ -32,8 +32,15 @@ export interface CompetencyScore {
   score: number;
 }
 
+export interface PotentialFactor {
+  id: string;
+  label: string;
+  score: number;
+}
+
 export interface OverviewCompetenze {
   competencies: CompetencyScore[];
+  potentialFactors: PotentialFactor[];
   puntiDiForza: string;
   areeDiMiglioramento: string;
 }

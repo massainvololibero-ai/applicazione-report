@@ -13,9 +13,17 @@ export function Step3OverviewCompetenze() {
     dispatch({ type: 'UPDATE_SLIDE', slide: 'slide3', data: { competencies: updated } });
   };
 
+  const updatePotentialScore = (id: string, score: number) => {
+    const updated = data.potentialFactors.map(p => p.id === id ? { ...p, score } : p);
+    dispatch({ type: 'UPDATE_SLIDE', slide: 'slide3', data: { potentialFactors: updated } });
+  };
+
   const update = (fields: Partial<typeof data>) => {
     dispatch({ type: 'UPDATE_SLIDE', slide: 'slide3', data: fields });
   };
+
+  const competenzeMedia = (data.competencies.reduce((sum, c) => sum + c.score, 0) / data.competencies.length).toFixed(1);
+  const potenzialeMedia = (data.potentialFactors.reduce((sum, p) => sum + p.score, 0) / data.potentialFactors.length).toFixed(1);
 
   return (
     <div>
@@ -49,7 +57,7 @@ export function Step3OverviewCompetenze() {
         </div>
 
         <div>
-          <FormSection title="Punteggi Competenze" description="Valuta ogni competenza da 1 a 5">
+          <FormSection title="Competenze Manageriali" description="Valuta ogni competenza da 1 a 5">
             <div className="space-y-3">
               {data.competencies.map(comp => (
                 <RatingInput
@@ -60,6 +68,30 @@ export function Step3OverviewCompetenze() {
                   max={5}
                 />
               ))}
+            </div>
+            <div className="mt-3 p-3 bg-k2p-superlight rounded-lg border border-k2p-light">
+              <p className="text-xs text-k2p-grape font-medium">
+                Media Competenze Manageriali: <span className="text-lg font-bold text-k2p-violet">{competenzeMedia}</span>/5
+              </p>
+            </div>
+          </FormSection>
+
+          <FormSection title="Potenziale" description="Valuta i 3 fattori di potenziale da 1 a 5">
+            <div className="space-y-3">
+              {data.potentialFactors.map(factor => (
+                <RatingInput
+                  key={factor.id}
+                  label={factor.label}
+                  value={factor.score}
+                  onChange={score => updatePotentialScore(factor.id, score)}
+                  max={5}
+                />
+              ))}
+            </div>
+            <div className="mt-3 p-3 bg-k2p-superlight rounded-lg border border-k2p-light">
+              <p className="text-xs text-k2p-grape font-medium">
+                Media Potenziale: <span className="text-lg font-bold text-k2p-violet">{potenzialeMedia}</span>/5
+              </p>
             </div>
           </FormSection>
         </div>

@@ -1,4 +1,4 @@
-import type { CompetencyScore } from '@/types/dossier';
+import type { CompetencyScore, PotentialFactor } from '@/types/dossier';
 
 export const COMPETENCY_LABELS = [
   { id: 'innovazione_sostenibile', label: 'Innovazione sostenibile' },
@@ -17,5 +17,17 @@ export const COMPETENCY_LABELS = [
 export const DEFAULT_COMPETENCIES: CompetencyScore[] = COMPETENCY_LABELS.map(c => ({
   id: c.id,
   label: c.label,
+  score: 3,
+}));
+
+export const POTENTIAL_LABELS = [
+  { id: 'drive', label: 'Drive' },
+  { id: 'ambition', label: 'Ambition' },
+  { id: 'engagement', label: 'Engagement' },
+] as const;
+
+export const DEFAULT_POTENTIAL_FACTORS: PotentialFactor[] = POTENTIAL_LABELS.map(p => ({
+  id: p.id,
+  label: p.label,
   score: 3,
 }));

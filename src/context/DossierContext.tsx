@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer, type ReactNode } from 'react';
 import type { DossierData } from '@/types/dossier';
-import { DEFAULT_COMPETENCIES } from '@/constants/competencies';
+import { DEFAULT_COMPETENCIES, DEFAULT_POTENTIAL_FACTORS } from '@/constants/competencies';
 import { DEFAULT_DEVELOPMENT_TOOLS } from '@/constants/developmentTools';
 
 const initialState: DossierData = {
@@ -23,6 +23,7 @@ const initialState: DossierData = {
   },
   slide3: {
     competencies: [...DEFAULT_COMPETENCIES],
+    potentialFactors: [...DEFAULT_POTENTIAL_FACTORS],
     puntiDiForza: '',
     areeDiMiglioramento: '',
   },
