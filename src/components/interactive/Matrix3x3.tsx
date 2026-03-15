@@ -36,9 +36,9 @@ export function Matrix3x3({ position, onChange }: Matrix3x3Props) {
 
   const pad = 60;
   const w = 420;
-  const h = 320;
+  const h = 380;
   const gw = w - pad - 20;
-  const gh = h - 20 - 30;
+  const gh = h - 20 - 90;
   const cellW = gw / 3;
   const cellH = gh / 3;
 
@@ -77,14 +77,14 @@ export function Matrix3x3({ position, onChange }: Matrix3x3Props) {
           <text
             key={`col-${i}`}
             x={pad + i * cellW + cellW / 2}
-            y={h - 5}
+            y={20 + gh + 18}
             textAnchor="middle"
             fill="#490473"
             fontSize="9"
             fontWeight="600"
           >
             {label.split('\n').map((line, li) => (
-              <tspan key={li} x={pad + i * cellW + cellW / 2} dy={li === 0 ? 0 : 11}>{line}</tspan>
+              <tspan key={li} x={pad + i * cellW + cellW / 2} dy={li === 0 ? 0 : 12}>{line}</tspan>
             ))}
           </text>
         ))}
@@ -106,7 +106,7 @@ export function Matrix3x3({ position, onChange }: Matrix3x3Props) {
         ))}
 
         {/* Axis titles */}
-        <text x={pad + gw / 2} y={h - 28} textAnchor="middle" fill="#490473" fontSize="11" fontWeight="bold">PERCORSO</text>
+        <text x={pad + gw / 2} y={20 + gh + 55} textAnchor="middle" fill="#490473" fontSize="11" fontWeight="bold">PERCORSO</text>
         <text x={14} y={20 + gh / 2} textAnchor="middle" fill="#490473" fontSize="11" fontWeight="bold"
           transform={`rotate(-90, 14, ${20 + gh / 2})`}>POTENZIALE DI LEADERSHIP</text>
 

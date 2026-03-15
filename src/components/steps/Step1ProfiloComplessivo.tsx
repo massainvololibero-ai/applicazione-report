@@ -87,7 +87,7 @@ export function Step1ProfiloComplessivo() {
               <span className="text-xs text-gray-500">Potenziale: <strong className="text-k2p-violet">{potenzialeAvg.toFixed(1)}/5</strong></span>
               <span className="text-xs text-gray-400">(calcolati da Step 3)</span>
             </div>
-            <div className="bg-white rounded-xl p-3 border border-gray-100" style={{ height: 320 }}>
+            <div className="bg-white rounded-xl p-3 border border-gray-100" style={{ height: 440 }}>
               <CompetenzePotenzialePlot
                 competenzeAvg={competenzeAvg}
                 potenzialeAvg={potenzialeAvg}

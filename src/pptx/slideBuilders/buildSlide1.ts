@@ -53,10 +53,10 @@ export function buildSlide1(pres: PptxGenJS, data: ProfiloComplessivo, scores?: 
 
   // Competenze / Potenziale matrix plot (upper right, large)
   if (scores) {
-    const plotX = rightX + 0.5;
-    const plotY = contentY + 0.1;
-    const plotW = 4.5;
-    const plotH = 3.8;
+    const plotX = rightX + 0.2;
+    const plotY = contentY;
+    const plotW = 5.5;
+    const plotH = 5.0;
 
     // Background
     slide.addShape('rect', {
@@ -116,7 +116,7 @@ export function buildSlide1(pres: PptxGenJS, data: ProfiloComplessivo, scores?: 
   }
 
   // Valore di Mercato rating (below matrix)
-  const ratingsY = contentY + 4.5;
+  const ratingsY = contentY + 5.5;
   addSectionHeader(slide, 'Valore di Mercato', rightX, ratingsY, 6);
   drawRatingBar(slide, rightX, ratingsY + 0.25, data.valoreDiMercato, 5,
     ['Carenze rilevanti', 'Best in class']);
