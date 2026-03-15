@@ -75,7 +75,6 @@ export function buildSlide6(pres: PptxGenJS, data: RischioUscita) {
     x: dotX, y: dotY, w: 0.25, h: 0.25,
     fill: { color: PPTX_COLORS.unlockedViolet },
     line: { color: PPTX_COLORS.keyGrape, width: 2 },
-    shadow: { type: 'outer', blur: 6, offset: 2, color: '000000', opacity: 0.2 },
   });
 
   // Comment section

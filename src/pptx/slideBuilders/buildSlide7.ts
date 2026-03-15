@@ -81,7 +81,6 @@ export function buildSlide7(pres: PptxGenJS, data: GrowthPotential) {
     x: dotCX, y: dotCY, w: 0.3, h: 0.3,
     fill: { color: PPTX_COLORS.unlockedViolet },
     line: { color: PPTX_COLORS.keyGrape, width: 2 },
-    shadow: { type: 'outer', blur: 6, offset: 2, color: '000000', opacity: 0.2 },
   });
 
   // Comment section

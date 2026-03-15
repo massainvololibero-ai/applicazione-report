@@ -5,13 +5,7 @@ import { RatingInput } from '@/components/form/RatingInput';
 import { IndicatorSelector } from '@/components/form/IndicatorSelector';
 import { FormSection } from '@/components/form/FormSection';
 import type { IndicatorLevel } from '@/types/dossier';
-function averageToIndicator(avg: number): IndicatorLevel {
-  if (avg <= 1.5) return 'basso';
-  if (avg <= 2.5) return 'medio-basso';
-  if (avg <= 3.5) return 'medio';
-  if (avg <= 4.5) return 'medio-alto';
-  return 'alto';
-}
+import { CompetenzePotenzialePlot } from '@/components/interactive/CompetenzePotenzialePlot';
 
 export function Step1ProfiloComplessivo() {
   const { state, dispatch } = useDossier();
@@ -20,8 +14,6 @@ export function Step1ProfiloComplessivo() {
 
   const competenzeAvg = slide3.competencies.reduce((s, c) => s + c.score, 0) / slide3.competencies.length;
   const potenzialeAvg = slide3.potentialFactors.reduce((s, p) => s + p.score, 0) / slide3.potentialFactors.length;
-  const computedCompetenze = averageToIndicator(competenzeAvg);
-  const computedPotenziale = averageToIndicator(potenzialeAvg);
 
   const update = (fields: Partial<typeof data>) => {
     dispatch({ type: 'UPDATE_SLIDE', slide: 'slide1', data: fields });
@@ -76,9 +68,7 @@ export function Step1ProfiloComplessivo() {
               rows={3}
             />
           </FormSection>
-        </div>
 
-        <div className="space-y-5">
           <FormSection title="Considerazioni Finali">
             <TextArea
               label="Considerazioni Finali"
@@ -87,6 +77,23 @@ export function Step1ProfiloComplessivo() {
               placeholder="Sintesi della valutazione e percorso di sviluppo..."
               rows={4}
             />
+          </FormSection>
+        </div>
+
+        <div className="space-y-5">
+          <FormSection title="Mappa Competenze / Potenziale">
+            <div className="flex items-center gap-4 mb-2">
+              <span className="text-xs text-gray-500">Competenze: <strong className="text-k2p-violet">{competenzeAvg.toFixed(1)}/5</strong></span>
+              <span className="text-xs text-gray-500">Potenziale: <strong className="text-k2p-violet">{potenzialeAvg.toFixed(1)}/5</strong></span>
+              <span className="text-xs text-gray-400">(calcolati da Step 3)</span>
+            </div>
+            <div className="bg-white rounded-xl p-3 border border-gray-100" style={{ height: 320 }}>
+              <CompetenzePotenzialePlot
+                competenzeAvg={competenzeAvg}
+                potenzialeAvg={potenzialeAvg}
+                candidateName={data.candidateName}
+              />
+            </div>
           </FormSection>
 
           <FormSection title="Valutazioni">
@@ -100,28 +107,6 @@ export function Step1ProfiloComplessivo() {
           </FormSection>
 
           <FormSection title="Indicatori">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-medium text-k2p-dark">Competenze Manageriali</span>
-                <span className="text-xs text-k2p-violet font-bold">({competenzeAvg.toFixed(1)}/5 — calcolato da Step 3)</span>
-              </div>
-              <IndicatorSelector
-                label=""
-                value={computedCompetenze}
-                onChange={() => {}}
-              />
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-medium text-k2p-dark">Potenziale</span>
-                <span className="text-xs text-k2p-violet font-bold">({potenzialeAvg.toFixed(1)}/5 — calcolato da Step 3)</span>
-              </div>
-              <IndicatorSelector
-                label=""
-                value={computedPotenziale}
-                onChange={() => {}}
-              />
-            </div>
             <IndicatorSelector
               label="Valore Aziendale"
               value={data.valoreAziendale}

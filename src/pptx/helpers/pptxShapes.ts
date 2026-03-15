@@ -21,15 +21,6 @@ export function addTopBar(slide: PptxGenJS.Slide, title: string, subtitle: strin
     fontFace: FONT, fontSize: 16, color: PPTX_COLORS.white, bold: true,
   });
 
-  // Logo text (instead of image for simplicity)
-  slide.addText([
-    { text: 'key', options: { fontFace: FONT, fontSize: 8, color: PPTX_COLORS.white, bold: true } },
-    { text: '2', options: { fontFace: FONT, fontSize: 11, color: PPTX_COLORS.lightViolet, bold: true } },
-    { text: 'people', options: { fontFace: FONT, fontSize: 8, color: PPTX_COLORS.white, bold: true } },
-  ], {
-    x: 11.5, y: 0.15, w: 1.5, h: 0.35, align: 'right',
-  });
-
   // Thin violet line at bottom
   slide.addShape('line', {
     x: 0, y: 0.65, w: 13.33, h: 0,
@@ -38,17 +29,9 @@ export function addTopBar(slide: PptxGenJS.Slide, title: string, subtitle: strin
 }
 
 export function addFooter(slide: PptxGenJS.Slide, pageNum: number) {
-  slide.addText(`${pageNum} | Copyright \u00A9 2025 Key2people S.r.l. All rights reserved.`, {
-    x: 0.3, y: 7.05, w: 6, h: 0.3,
+  slide.addText(`${pageNum}`, {
+    x: 0.3, y: 7.05, w: 1, h: 0.3,
     fontFace: FONT, fontSize: 7, color: '999999',
-  });
-
-  slide.addText([
-    { text: 'key', options: { fontFace: FONT, fontSize: 7, color: PPTX_COLORS.keyGrape, bold: true } },
-    { text: '2', options: { fontFace: FONT, fontSize: 9, color: PPTX_COLORS.unlockedViolet, bold: true } },
-    { text: 'people', options: { fontFace: FONT, fontSize: 7, color: PPTX_COLORS.keyGrape, bold: true } },
-  ], {
-    x: 11.8, y: 7.0, w: 1.2, h: 0.35, align: 'right',
   });
 }
 

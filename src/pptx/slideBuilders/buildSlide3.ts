@@ -12,7 +12,7 @@ export function buildSlide3(pres: PptxGenJS, data: OverviewCompetenze) {
 
   // Radar chart
   const chartData = [{
-    name: 'Valutazione K2P',
+    name: 'Valutazione',
     labels: data.competencies.map(c => c.label),
     values: data.competencies.map(c => c.score),
   }];
@@ -40,7 +40,7 @@ export function buildSlide3(pres: PptxGenJS, data: OverviewCompetenze) {
     x: 5.5, y: 0.85, w: 0.15, h: 0.15,
     fill: { color: PPTX_COLORS.unlockedViolet },
   });
-  slide.addText('= valutazione K2P', {
+  slide.addText('= valutazione', {
     x: 5.7, y: 0.82, w: 1.5, h: 0.2,
     fontFace: FONT, fontSize: 7, color: PPTX_COLORS.blackK2P,
   });

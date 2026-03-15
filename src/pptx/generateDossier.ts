@@ -21,8 +21,8 @@ export async function generateDossier(data: DossierData): Promise<void> {
 
   // Configure presentation
   pres.layout = 'LAYOUT_WIDE';
-  pres.author = 'Key2people Assessment Platform';
-  pres.company = 'Key2people';
+  pres.author = 'Assessment Platform';
+  pres.company = '';
   pres.subject = `Executive Assessment - ${data.slide1.candidateName}`;
   pres.title = `Assessment Dossier - ${data.slide1.candidateName}`;
 
@@ -37,7 +37,7 @@ export async function generateDossier(data: DossierData): Promise<void> {
   };
 
   // Build each slide
-  buildSlide1(pres, slide1WithComputed);
+  buildSlide1(pres, slide1WithComputed, { competenzeAvg, potenzialeAvg });
   buildSlide2(pres, data.slide2);
   buildSlide3(pres, data.slide3);
   buildSlide4(pres, data.slide4);
